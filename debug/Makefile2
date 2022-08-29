@@ -1,0 +1,4 @@
+got_simulation: main.cpp
+     gcc -std=gnu99 -pg -g -O0 -lm -o got_simulation 
+
+	
