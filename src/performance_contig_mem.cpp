@@ -4,8 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
-#include "../include/gof_serial.h"
-
+#include "../include/gof_serial_contig_mem.h"
 using namespace std;
 
 vector<int> gridSizes= {10, 100, 1000}; 
@@ -51,7 +50,7 @@ vector<vector<vector<float> > > compute_stats(vector<vector<vector<float> > > &t
 
 void save_stats(vector<vector<vector<float> > > &stats) {
     ofstream file;
-    file.open("../output/performance_stats/stats.txt");
+    file.open("../output/performance_stats/stats_contig_mem.txt");
     string stat_types[2] = {"average ","variance "}; 
 
     for (int i = 0; i < s; i++){

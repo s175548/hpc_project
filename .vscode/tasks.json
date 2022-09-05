@@ -2,9 +2,9 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang++ build active file",
-            "command": "/usr/bin/clang++",
-            "args": [
+            "label": "C/C++: g++ build active file",
+            "command": "/usr/bin/g++",
+            "args": ["-std=gnu++11",
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",

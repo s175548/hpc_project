@@ -1,11 +1,13 @@
 #include <vector>
 #include <iostream>
 
-void a(std::vector<std::vector<int> > &s,int rows, int cols){
-        std::cout<<"1";
+void a(bool &s, int rows, int cols){
+        std::cout<<s[9][9];
 }
-int main(){
-    std::vector<std::vector<int> > s(10,std::vector<int>(10)); 
-    a(s,10,10);
+int main(int argc, char *argv[]){
+    int gridSize = atoi(argv[0]);
+    bool s[gridSize][gridSize];
+    s[gridSize][gridSize] = 1; 
+    a(**s,10,10);
     return 0;
 }

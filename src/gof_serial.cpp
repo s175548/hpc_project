@@ -1,7 +1,6 @@
-#include <random>
 #include <iostream>
 #include <cmath>
-
+#include <random>
 
 
 
@@ -20,11 +19,11 @@ void printGrid(bool **gridOne, int size){
             }
             if(b == size-1)
             {
-               std::cout << endl;
+               std::cout << std::endl;
             }
         }
     } 
-    cout << "\n\n";
+    std::cout << "\n\n";
 }  
 
 int countLiveNeighs(bool **gridOne, int i, int j)
@@ -36,8 +35,8 @@ int countLiveNeighs(bool **gridOne, int i, int j)
 }
 
 void generateGrid(bool **gridOne, int N,int sparsity, int seed){
-    default_random_engine generator(seed);
-    uniform_real_distribution<double> distribution(0.0,1.0);
+    std::default_random_engine generator(seed);
+    std::uniform_real_distribution<double> distribution(0.0,1.0);
     for (int i = 2; i < N; i++)
     {
         for (int j = 2; j < N; j++)
@@ -69,7 +68,7 @@ void updateGrid(bool **gridOne, bool **gridTwo, int N){
     } 
 }
 
-void rollOut(int gridSize, int n_generations,int sparsity, int seed, bool verbose)
+void rollOut(int gridSize, int n_generations,int sparsity, int seed, bool verbose, bool load_grid, std::string filename)
 {   
     bool **gridOne;
     gridOne = new bool *[gridSize];
@@ -91,7 +90,6 @@ void rollOut(int gridSize, int n_generations,int sparsity, int seed, bool verbos
         updateGrid(gridOne,gridTwo,size-1);
         gridOne = gridTwo;
         size+=2;
-        free(gridTwo);
     }
 
 }
