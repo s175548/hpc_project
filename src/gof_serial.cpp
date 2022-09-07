@@ -73,7 +73,7 @@ void rollOut(int gridSize, int n_generations,int sparsity, int seed, bool verbos
     bool **gridOne;
     gridOne = new bool *[gridSize];
     for(int i = 0; i < (gridSize); i++){
-        gridOne[i] = new bool[gridSize];
+        gridOne[i] = new bool[gridSize]();
     }
     generateGrid(gridOne,gridSize-2,seed,sparsity);
     
@@ -85,8 +85,13 @@ void rollOut(int gridSize, int n_generations,int sparsity, int seed, bool verbos
         bool **gridTwo;
         gridTwo = new bool *[size+2];
         for(int i = 0; i < (size+2); i++){
-            gridTwo[i] = new bool[size+2];
+            gridTwo[i] = new bool[size+2]();
         }
+        
+        for(int i = 0; i < (gridSize); i++){
+            delete [] gridOne[i];
+        }
+    
         updateGrid(gridOne,gridTwo,size-1);
         gridOne = gridTwo;
         size+=2;

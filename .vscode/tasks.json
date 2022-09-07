@@ -9,7 +9,9 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "/home/s4756015/hpc/hpc_project/src/gof_serial_contig_mem.cpp"
+
             ],
             "options": {
                 "cwd": "${fileDirname}"

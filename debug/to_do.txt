@@ -1,5 +1,0 @@
-1.  Make profiling work 
-    - look for optimizations to be done based on output 
-2.  Figure out how to verify that it works 
-    - use 5 seed configurations and use them also on the net versin of GOL
-    

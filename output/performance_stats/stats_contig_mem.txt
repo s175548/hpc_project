@@ -1,16 +1,16 @@
 sparsity: 0.1
 
-gridsize:           10        100       1000      
-            average 15050.6   402824    3.73456e+07
-           variance 4.49897e+071.91966e+062.97424e+10
+gridsize:           10             100            1000           2000           
+            average 149            6347           614521         2.44998e+06    
+           variance 0              0              0              0              
 
 
 
 sparsity: 0.9
 
-gridsize:           10        100       1000      
-            average 12384.6   414970    3.68989e+07
-           variance 7602.3    113423    3.56565e+11
+gridsize:           10             100            1000           2000           
+            average 131            6344           609718         2.43655e+06    
+           variance 0              0              0              0              
 
 
 

@@ -7,7 +7,7 @@
 
 
 
-void printGrid(int *gridOne, int gridSize){
+void printGrid(bool *gridOne, int gridSize){
     for(int a = 2; a < gridSize-2; a++)
         {
         for(int b = 2; b < gridSize-2; b++)
@@ -30,7 +30,7 @@ void printGrid(int *gridOne, int gridSize){
 }  
 
 
-void saveGrid(int *gridOne, int gridSize, std::string filename){
+void saveGrid(bool *gridOne, int gridSize, std::string filename){
     filename = "../output/correctness_prints/last_grid_prints"+filename;
     std::ofstream file;
     file.open(filename);
@@ -55,7 +55,7 @@ void saveGrid(int *gridOne, int gridSize, std::string filename){
     file.close();
 }  
 
-int countLiveNeighs(int *gridOne,int *gridTwo, int i, int j, int N)
+int countLiveNeighs(bool *gridOne,bool *gridTwo, int i, int j, int N)
 {
     int row_below = gridOne[(i+1)*N+j]+gridOne[(i+1)*N+j-1]+gridOne[(i+1)*N+j+1]; 
     int row_above = gridOne[(i-1)*N+j]+gridOne[(i-1)*N+j-1]+gridOne[(i-1)*N+j+1]; 
@@ -63,7 +63,7 @@ int countLiveNeighs(int *gridOne,int *gridTwo, int i, int j, int N)
     return row_above+row_below+row_same;  
 }
 
-void generateGrid(int *gridOne, int gridSize,int n_generations,float sparsity, int seed){
+void generateGrid(bool *gridOne, int gridSize,int n_generations,float sparsity, int seed){
     std::default_random_engine generator(seed);
     std::uniform_real_distribution<double> distribution(0.0,1.0);
     for (int i = n_generations+2; i < gridSize-n_generations-2; i++)
@@ -77,7 +77,7 @@ void generateGrid(int *gridOne, int gridSize,int n_generations,float sparsity, i
     }   
 }
 
-void readGrid(std::string filename, int *gridOne,int gridSize,int n_generations){
+void readGrid(std::string filename, bool *gridOne,int gridSize,int n_generations){
     
     std::string filepath = "../data/"+filename;
     std::ifstream file;
@@ -105,7 +105,7 @@ void readGrid(std::string filename, int *gridOne,int gridSize,int n_generations)
     file.close();
 }
    
-void updateGrid(int *gridOne, int *gridTwo, int gridSize, int generations_left){
+void updateGrid(bool *gridOne, bool *gridTwo, int gridSize, int generations_left){
     
     for (int i = generations_left+1; i < gridSize-generations_left-1; i++){
             for (int j = generations_left+1; j < gridSize-generations_left-1; j++){
@@ -131,17 +131,17 @@ void rollOut(int gridSize_start, int n_generations, float sparsity, int seed, bo
             std::string filename)
 {   
     int gridSize = gridSize_start+4 + 2*n_generations;
-    
     int gridsize_sq= std::pow(gridSize,2);
-    int *gridOne = new int [gridsize_sq];
-    int *gridTwo = new int [gridsize_sq];
-    
+    bool *gridOne = new bool [gridsize_sq]();
+    bool *gridTwo = new bool [gridsize_sq]();
+
     if(load_grid){
         readGrid(filename,gridOne,gridSize,n_generations);
     }
     else{
         generateGrid(gridOne,gridSize,n_generations,sparsity,seed);
     }
+
     int generations_left = n_generations;
     for (int j = 0; j < n_generations; j++) {
         generations_left-=1;  
@@ -150,6 +150,7 @@ void rollOut(int gridSize_start, int n_generations, float sparsity, int seed, bo
             printGrid(gridOne,gridSize);
         }
         updateGrid(gridOne, gridTwo,gridSize,generations_left);
+        std::swap(gridOne,gridTwo);
     }
     if(verbose)
     {
@@ -159,6 +160,8 @@ void rollOut(int gridSize_start, int n_generations, float sparsity, int seed, bo
     {
         saveGrid(gridOne,gridSize,filename);
     }
+    delete [] gridOne;
+    delete [] gridTwo;
     
 }
 
